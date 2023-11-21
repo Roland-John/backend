@@ -10,16 +10,29 @@ class CarouselItems extends Model
     use HasFactory;
 
     /**
-     * The data type of the auto-incrementing ID.
+     * The table associated with the model.
      *
      * @var string
      */
-    protected $keyType = 'carousel_items';
+    protected $table = 'carousel_items';
 
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected $primaryKey = 'flight_id';
+    protected $primaryKey = 'carousel_item_id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'carousel_name',
+        'image_path',
+        'decription',
+        'user_id'
+
+    ];
 }
