@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Models\CarouselItems;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\CarouselItemsRequest;
 
 class CarouselItemsController extends Controller
 {
@@ -20,9 +20,17 @@ class CarouselItemsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CarouselItemsRequest $request)
     {
-        //
+        // Retrieve the validated input data...
+        $validated = $request->validated();
+        $carouselItem = CarouselItems::create($validated);
+        
+        /*'carousel_name' => $request->carousel_name,
+            'image_path' => $request->image_path,
+            'description'=> $request->description,
+            'user_id'=> $request->user_id,*/
+        return $carouselItem;
     }
 
     /**
@@ -31,16 +39,21 @@ class CarouselItemsController extends Controller
     public function show(string $id)
     {
         return CarouselItems::findOrFail($id);
-
-        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CarouselItemsRequest $request, string $id)
     {
-        //
+
+        $validated = $request->validated();
+
+        $carouselItem = CarouselItems::findorfail($id);
+
+        $carouselItem ->update($validated);
+            
+        return $carouselItem;
     }
 
     /**
@@ -48,6 +61,10 @@ class CarouselItemsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $carouselItem = CarouselItems::findorfail($id);
+ 
+        $carouselItem->delete();
+
+        return $carouselItem;
     }
 }
