@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
@@ -32,8 +33,14 @@ class AuthController extends Controller
     /**
      * Logout using the specified resource.
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        return false;
+        $request->user()->tokens()->delete();
+
+        $response = [
+            'message' => 'logout.'
+        ];
+
+        return $response;
     }
 }
