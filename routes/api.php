@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\CarouselItemsController;
+use App\Http\Controllers\Api\AiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,9 @@ use App\Http\Controllers\Api\CarouselItemsController;
 // Public APIs
 Route::post('/login', [AuthController::class, 'login']);
 Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    // OCR API
+Route::post('/ocr', [AiController::class, 'ocr'])->name('ocr.image');
+    
 // Private APIs
 Route::middleware(['auth:sanctum'])->group(function () {
     

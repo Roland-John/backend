@@ -50,7 +50,7 @@ class UserRequest extends FormRequest
             ];
         }
 
-        else if (request()->routeIs('user.image') || request()->routeIs('profile.image') ){
+        else if (request()->routeIs('user.image') || request()->routeIs('profile.image') || request()->routeIs('ocr.image')){
             return [
                 'password'  => 'image|mimes:jpg,bmp,png|max:2048'
             ];
